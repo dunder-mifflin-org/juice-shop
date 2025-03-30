@@ -1,0 +1,60 @@
+name: "OWASP Juice Shop CodeQL Configuration"
+
+queries:
+  - uses: security-and-quality
+  - uses: security-extended
+
+paths:
+  - lib
+  - models
+  - routes
+  - server.ts
+  - frontend/src
+  - data
+
+paths-ignore:
+  - node_modules
+  - '**/*.test.ts'
+  - '**/*.spec.ts'
+  - test
+  - frontend/dist
+  - coverage
+  - vagrant
+
+query-filters:
+  - exclude:
+      id: js/unused-local-variable
+
+security-severity-overrides:
+  - security-severity:
+      2.5: medium
+  - security-severity:
+      3.5: high
+
+disable-default-queries: false
+
+packs:
+  # Run all additional security queries included in the JavaScript pack
+  - codeql/javascript-queries:security-extended
+  - codeql/typescript-queries:security-extended
+
+query-suites:
+  - name: OWASP Top 10 (2021)
+    queries:
+      - uses: security-and-quality
+        description: Find OWASP Top 10 vulnerabilities
+      
+  - name: Hardcoded Credentials Check
+    queries:
+      - name: Finding Hardcoded Credentials 
+        uses: security-extended/codeql-suites/javascript-security-extended.qls
+        description: Detect hardcoded credentials in the code (deliberate in our case for demonstration)
+
+  - name: Custom JavaScript Security Checks
+    queries:
+      - name: Cross-site Scripting
+        uses: security-extended/codeql-suites/javascript-security-extended.qls
+      - name: SQL Injection
+        uses: security-extended/codeql-suites/javascript-security-extended.qls
+      - name: Command Injection
+        uses: security-extended/codeql-suites/javascript-security-extended.qls

@@ -647,8 +647,12 @@ restoreOverwrittenFilesWithOriginals().then(() => {
   /* Routes for deliberately insecure credential demonstration */
   app.get('/rest/insecure/aws-credentials', insecureDemo.getAwsCredentials())
   app.get('/rest/insecure/google-credentials', insecureDemo.getGoogleCredentials())
+  app.get('/rest/insecure/azure-credentials', insecureDemo.getAzureCredentials())
+  app.get('/rest/insecure/aws-environment-credentials', insecureDemo.getAwsEnvironmentCredentials())
   app.get('/rest/insecure/aws-demo', insecureDemo.demoAWSUsage())
   app.get('/rest/insecure/google-demo', insecureDemo.demoGoogleAPIUsage())
+  app.get('/rest/insecure/azure-demo', insecureDemo.demoAzureUsage())
+  app.get('/rest/insecure/all-credentials', insecureDemo.getAllCredentials())
 
   /* Error Handling */
   app.use(verify.errorHandlingChallenge())
