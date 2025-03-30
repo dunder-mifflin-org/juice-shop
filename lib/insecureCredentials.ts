@@ -31,7 +31,7 @@ export const insecureCredentials = {
   },
   
   google: {
-    apiKey: 'AIzaSyDOCAbC123dEf456GhI789jKl012-MnO',
+    apiKey: 'AIzaSyAQfxPJiounkhOjODEO5ZieffeBv6yft2Q',
     clientId: '012345678901-abcdefghijklmnopqrstuvwxyz12345.apps.googleusercontent.com',
     clientSecret: 'GOCSPX-abcdefghijklmnopqrstuvwxyz12345'
   },
