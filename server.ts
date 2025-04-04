@@ -101,6 +101,8 @@ const nftMint = require('./routes/nftMint')
 const web3Wallet = require('./routes/web3Wallet')
 const updateProductReviews = require('./routes/updateProductReviews')
 const likeProductReviews = require('./routes/likeProductReviews')
+const insecureDemo = require('./routes/insecureDemo')
+const sqlInjectionDemo = require('./routes/demoSqlInjection')
 const security = require('./lib/insecurity')
 const app = express()
 const server = require('http').Server(app)
@@ -642,6 +644,23 @@ restoreOverwrittenFilesWithOriginals().then(() => {
   app.post('/snippets/fixes', vulnCodeFixes.checkCorrectFix())
 
   app.use(angular())
+
+  /* Routes for deliberately insecure credential demonstration */
+  app.get('/rest/insecure/aws-credentials', insecureDemo.getAwsCredentials())
+  app.get('/rest/insecure/google-credentials', insecureDemo.getGoogleCredentials())
+  app.get('/rest/insecure/azure-credentials', insecureDemo.getAzureCredentials())
+  app.get('/rest/insecure/aws-environment-credentials', insecureDemo.getAwsEnvironmentCredentials())
+  app.get('/rest/insecure/aws-demo', insecureDemo.demoAWSUsage())
+  app.get('/rest/insecure/google-demo', insecureDemo.demoGoogleAPIUsage())
+  app.get('/rest/insecure/azure-demo', insecureDemo.demoAzureUsage())
+  app.get('/rest/insecure/all-credentials', insecureDemo.getAllCredentials())
+
+  /* Routes for SQL injection vulnerability demonstration */
+  app.post('/rest/insecure/login', sqlInjectionDemo.vulnerableLogin())
+  app.get('/rest/insecure/products/search', sqlInjectionDemo.vulnerableSearch())
+  app.get('/rest/insecure/user/:id', sqlInjectionDemo.vulnerableUserDetails())
+  app.put('/rest/insecure/product/:id', sqlInjectionDemo.vulnerableProductUpdate())
+  app.get('/rest/insecure/examples/secure-queries', sqlInjectionDemo.secureQueryExamples())
 
   /* Error Handling */
   app.use(verify.errorHandlingChallenge())
