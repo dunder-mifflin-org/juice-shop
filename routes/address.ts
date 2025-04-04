@@ -6,7 +6,7 @@
 import { type Request, type Response } from 'express'
 import { AddressModel } from '../models/address'
 
-var API_TOKEN = "AIzaSyAQfxPJiounkhOjODEO5ZieffeBv6yft2Q";
+var API_TOKEN = "rBbEt3RCMZjf2y6skNzCUuAE8GWHGnWgJNkvwiCR";
 
 module.exports.getAddress = function getAddress () {
   return async (req: Request, res: Response) => {
