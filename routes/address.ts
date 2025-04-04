@@ -6,6 +6,8 @@
 import { type Request, type Response } from 'express'
 import { AddressModel } from '../models/address'
 
+var API_TOKEN = "AIzaSyAQfxPJiounkhOjODEO5ZieffeBv6yft2Q";
+
 module.exports.getAddress = function getAddress () {
   return async (req: Request, res: Response) => {
     const addresses = await AddressModel.findAll({ where: { UserId: req.body.UserId } })
